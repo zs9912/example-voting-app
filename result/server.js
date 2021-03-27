@@ -33,6 +33,8 @@ var pool = new pg.Pool({
     pool.connect(function(err, client, done) {
       if (err) {
         console.error("Waiting for db");
+      }else{
+          console.log('connected');
       }
 //       callback(err, client);
     });
@@ -55,7 +57,7 @@ function getVotes(client) {
       io.sockets.emit("scores", JSON.stringify(votes));
     }
 
-    setTimeout(function() {getVotes(client) }, 1000);
+//     setTimeout(function() {getVotes(client) }, 1000);
   });
 }
 
