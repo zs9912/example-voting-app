@@ -27,24 +27,24 @@ var pool = new pg.Pool({
   connectionString: 'postgres://postgres:postgres@db/postgres'
 });
 
-async.retry(
-  {times: 1000, interval: 1000},
-  function(callback) {
+// async.retry(
+//   {times: 1000, interval: 1000},
+//   function(callback) {
     pool.connect(function(err, client, done) {
       if (err) {
         console.error("Waiting for db");
       }
-      callback(err, client);
+//       callback(err, client);
     });
-  },
-  function(err, client) {
-    if (err) {
-      return console.error("Giving up");
-    }
-    console.log("Connected to db");
-    getVotes(client);
-  }
-);
+//   },
+//   function(err, client) {
+//     if (err) {
+//       return console.error("Giving up");
+//     }
+//     console.log("Connected to db");
+//     getVotes(client);
+//   }
+// );
 
 function getVotes(client) {
   client.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
